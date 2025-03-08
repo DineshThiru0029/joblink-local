@@ -1,10 +1,57 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Button from '@/components/Button';
-import { User, Settings, Star, Calendar, Award, Clock, MapPin, Briefcase, LogOut, ChevronRight } from 'lucide-react';
+import { User, Settings, Star, Calendar, Award, Clock, MapPin, Briefcase, LogOut, ChevronRight, FileText } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import JobCard from '@/components/JobCard';
+
+// Mock user data
+const user = {
+  name: 'Alex Morgan',
+  email: 'alex.morgan@example.com',
+  phone: '(555) 123-4567',
+  location: 'San Francisco, CA',
+  joinDate: 'January 2023',
+  completedJobs: 15,
+  rating: 4.9,
+  jobsInProgress: 2,
+  profileImage: null, // null for now
+};
+
+// Sample posted jobs data
+const postedJobs = [
+  {
+    id: '1',
+    title: 'House Cleaning Needed',
+    category: 'Home Cleaning',
+    description: 'Need thorough cleaning of a 2-bedroom apartment, including kitchen and bathrooms.',
+    location: 'Downtown',
+    distance: '0.3 miles',
+    pay: 80,
+    postedAt: '2 days ago',
+    poster: {
+      name: user.name,
+      rating: user.rating,
+      jobsPosted: 15
+    }
+  },
+  {
+    id: '2',
+    title: 'Leaky Faucet Repair',
+    category: 'Plumbing',
+    description: 'Kitchen faucet is leaking. Need someone with plumbing experience to fix it quickly.',
+    location: 'Westside',
+    distance: '1.2 miles',
+    pay: 65,
+    postedAt: '5 days ago',
+    poster: {
+      name: user.name,
+      rating: user.rating,
+      jobsPosted: 15
+    }
+  }
+];
 
 const ProfilePage = () => {
   // Mock user data
@@ -117,6 +164,42 @@ const ProfilePage = () => {
                 <Skill label="Furniture Assembly" />
                 <Skill label="Painting" />
                 <Skill label="General Repairs" />
+              </div>
+            </ProfileCard>
+            
+            {/* Posted Jobs Section */}
+            <ProfileCard title="My Posted Jobs" 
+              action={
+                <Link to="/my-jobs" className="text-sm text-primary hover:underline flex items-center">
+                  View All <ChevronRight className="w-3 h-3 ml-1" />
+                </Link>
+              }
+            >
+              <div className="space-y-4">
+                {postedJobs.length > 0 ? (
+                  postedJobs.map((job) => (
+                    <div key={job.id} className="mb-3">
+                      <JobCard 
+                        job={job} 
+                        style={{ transform: 'none' }} // Override any transform to fit in the card
+                      />
+                    </div>
+                  ))
+                ) : (
+                  <div className="text-center py-6 border border-dashed rounded-md bg-secondary/30">
+                    <FileText className="w-8 h-8 mx-auto text-muted-foreground mb-2" />
+                    <p className="text-muted-foreground">No jobs posted yet</p>
+                    <Link to="/post-job" className="mt-2 inline-block">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        icon={<FileText className="w-4 h-4" />}
+                      >
+                        Post a Job
+                      </Button>
+                    </Link>
+                  </div>
+                )}
               </div>
             </ProfileCard>
             
