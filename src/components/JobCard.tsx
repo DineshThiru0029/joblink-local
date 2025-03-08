@@ -24,9 +24,10 @@ interface JobCardProps {
   job: JobProps;
   className?: string;
   featured?: boolean;
+  style?: React.CSSProperties; // Added this line to accept style prop
 }
 
-const JobCard = ({ job, className, featured = false }: JobCardProps) => {
+const JobCard = ({ job, className, featured = false, style }: JobCardProps) => {
   return (
     <Link 
       to={`/job/${job.id}`}
@@ -35,6 +36,7 @@ const JobCard = ({ job, className, featured = false }: JobCardProps) => {
         "group", // For group hover effects
         className
       )}
+      style={style} // Added this line to pass style prop to Link
     >
       <div 
         className={cn(
