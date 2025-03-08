@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import JobDetails from "./pages/JobDetails";
 import Profile from "./pages/Profile";
 import PostJob from "./pages/PostJob";
+import MyPostedJobs from "./pages/MyPostedJobs";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/job/:id" element={<JobDetails />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/post-job" element={<PostJob />} />
+          <Route path="/my-jobs" element={<MyPostedJobs />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

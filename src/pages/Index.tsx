@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -6,7 +5,7 @@ import SearchBar from '@/components/SearchBar';
 import Button from '@/components/Button';
 import CategoryFilter, { Category } from '@/components/CategoryFilter';
 import JobCard, { JobProps } from '@/components/JobCard';
-import { ArrowRight, Briefcase, Home as HomeIcon, Droplets, Wrench, Paintbrush, Car } from 'lucide-react';
+import { ArrowRight, Briefcase, Home as HomeIcon, Droplets, Wrench, Paintbrush, Car, ListChecks } from 'lucide-react';
 
 // Sample data
 const categories: Category[] = [
@@ -113,6 +112,10 @@ const Index = () => {
   const handlePostJob = () => {
     navigate('/post-job');
   };
+
+  const handleMyPostedJobs = () => {
+    navigate('/my-jobs');
+  };
   
   const filteredJobs = sampleJobs.filter(job => {
     if (selectedCategory && job.category.toLowerCase() !== categories.find(c => c.id === selectedCategory)?.name.toLowerCase()) {
@@ -163,10 +166,11 @@ const Index = () => {
                 <Button 
                   variant="outline"
                   className="text-sm md:text-base"
-                  icon={<ArrowRight className="w-4 h-4" />}
+                  icon={<ListChecks className="w-4 h-4" />}
                   iconPosition="right"
+                  onClick={handleMyPostedJobs}
                 >
-                  Find Work
+                  My Posted Jobs
                 </Button>
               </div>
             </div>
