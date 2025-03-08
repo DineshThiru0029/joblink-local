@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import SearchBar from '@/components/SearchBar';
 import Button from '@/components/Button';
@@ -98,6 +99,7 @@ const sampleJobs: JobProps[] = [
 ];
 
 const Index = () => {
+  const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchLocation, setSearchLocation] = useState('');
@@ -106,6 +108,10 @@ const Index = () => {
     setSearchTerm(query);
     setSearchLocation(location);
     console.log('Searching for:', query, 'in', location);
+  };
+  
+  const handlePostJob = () => {
+    navigate('/post-job');
   };
   
   const filteredJobs = sampleJobs.filter(job => {
@@ -150,6 +156,7 @@ const Index = () => {
                   variant="primary"
                   className="text-sm md:text-base"
                   icon={<Briefcase className="w-4 h-4" />}
+                  onClick={handlePostJob}
                 >
                   Post a Job
                 </Button>
